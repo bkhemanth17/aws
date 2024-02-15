@@ -1,0 +1,11 @@
+aws configure
+aws ec2 describe-vpcs
+aws ec2 describe-vpcs | grep-i VpcID
+ls .aws/
+ls .aws/credentials
+cat .aws/credentials
+nano .aws/credentials
+aws s3 ls
+aws s3 ls --profile s3
+nano .aws/config
+aws ec2 help
