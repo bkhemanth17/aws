@@ -1,16 +1,21 @@
-aws configure
-aws ec2 describe-vpcs
-aws ec2 describe-vpcs | grep-i VpcID
+#STEP1: Configuring IAM user with multiple user accounts.
+1. create iam user with console access & CLI access.
+2. Get access key and secret keys for the user (assign only ec2 admin permissions).
+3. Create another user with same console and cli access (assign only s3 permissions).
+3. create an ec2 instance (linux machine)
+
+aws configure : add aws access key, secret key, location, json
+
+#to change or to add multiple iam accounts
 ls .aws/
 ls .aws/credentials
-cat .aws/credentials
-nano .aws/credentials
-aws s3 ls
-aws s3 ls --profile s3
-nano .aws/config
-aws ec2 help
+nano .aws/credentials : in the nano file we can add multiple profiles 
+aws s3 ls --profile s3 : to switch as another profile user and access s3 buckets.
 
 
+#STEP2: Write policy 
+1.create iam user with console access & CLI access.
+2. Get access key and secret keys for the user and create policy manually
 
 #ec2 access to user just to start stop reebot instances based on key tag
 
@@ -41,3 +46,16 @@ aws ec2 help
         }
     ]
 }
+
+
+history:
+aws configure
+aws ec2 describe-vpcs
+aws ec2 describe-vpcs | grep-i VpcID
+ls .aws/
+ls .aws/credentials
+cat .aws/credentials
+nano .aws/credentials
+aws s3 ls
+aws s3 ls --profile s3
+nano .aws/config
