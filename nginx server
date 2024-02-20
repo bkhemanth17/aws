@@ -5,4 +5,5 @@
 yum update -y
 amazon-linux-extras install nginx1.12
 service nginx start
-echo '<h1 WEB SERVER-1</h1>'>> /usr/share/nginx/html/index.html
+echo '<h1 WEB SERVER-1</h1>' >>
+/usr/share/nginx/html/index.html
