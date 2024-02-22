@@ -10,3 +10,26 @@
     }
     ]
 }
+
+
+#s3 bucket public access to iam user to internally. Single Bucket.
+
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetBucketLocation",
+				"s3: ListAllMyBuckets"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "Stmt1708632736962",
+			"Action": "s3:*",
+			"Effect": "Allow",
+			"Resource": "arn:aws:s3:::annnnnnottttthhhherrrrbbbbuckkkeettt"
+		}
+	]
+}
