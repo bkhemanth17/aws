@@ -50,6 +50,8 @@ FROM ubuntu
 RUN apt update -y
 RUN apt install git maven apache2 -y
 RUN touch file1
+RUN apt install default-jre -y
+CMD ["java", "-version"]
 
 #create image from the Docker file
 docker build -t img:v2 .
