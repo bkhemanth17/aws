@@ -1,3 +1,6 @@
+#nginx server setup
+
+#setup-1
 #install nginx server in the server after vm creation
 #for older
 #!/bin/bash
@@ -7,7 +10,7 @@ amazon-linux-extras install nginx1.12 -y
 service nginx start
 /usr/share/nginx/html/index.html   #path to access the web server html file
 
-#for latest
+#for latest:
 yum install nginx -y
 systemctl start nginx.service
 systemctl status nginx.service
@@ -20,3 +23,8 @@ amazon-linux-extras install nginx1.12
 service nginx start
 echo '<h1 WEB SERVER-1</h1>' >>
 /usr/share/nginx/html/index.html
+
+#apachetomcat setup
+#goto https://dlcdn.apache.org/
+#select tomcat -> select tomcat version 8,9,10,11 -> internal modified version -> v9.0.87/ -> bin/ -> copy tar file (apache-tomcat-9.0.87.tar.gz)
+https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87.tar.gz
