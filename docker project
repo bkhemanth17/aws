@@ -58,7 +58,7 @@ ARGS		: to pass env variables outside the container
 EXPOSE		: used to allocate port number
 
 
-Vim Docker file
+Vim Dockerfile
 
 #File-1:
 FROM ubuntu
@@ -110,10 +110,17 @@ WORKDIR /tmp
 LABEL author hemanth
 EXPOSE 8080
 
-
-
-
 #create image from the Docker file
 docker build -t img:v2 .
 #create the container from the image(img:v2).
 docker run -it --name cont3 img:v2
+
+
+#PROJECT -1:
+#Basic Deployment.
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install apache2 -y
+COPY index.html /var/www/html
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
