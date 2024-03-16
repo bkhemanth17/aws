@@ -9,6 +9,7 @@
 aws configure : add aws access key, secret key, location, json
 
 #to change or to add multiple iam accounts
+#aws cli -> using access id and secret key
 ls .aws/
 ls .aws/credentials
 nano .aws/credentials : in the nano file we can add multiple profiles 
