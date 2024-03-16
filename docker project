@@ -8,8 +8,6 @@ docker pull ubuntu
 docker images
 docker run -it --name container1 ubuntu
 
-
-
 #after creating docker container to make containerization more efficient we need to capture iso image of container
 #ctrl pq to exit cont1 & docker ps -a to list all containters where as docker ps to list all runing container
 #docker stop cont1 -> to stop the running container
@@ -28,7 +26,6 @@ docker start container1
 docker inspect container1
 docker attach cont2
 
-
 #run it on the docker container
 #containersetup.sh
 
@@ -39,27 +36,23 @@ apt install vim -y
 git --version
 ls
 
-
-
 #Contarizing application using docker
 #create a docker file -> automation way
 #contdock.sh
 
-FROM		: to get the os for conatiner.
-RUN		: to execute linux commands(image creation)
-CMD		: to execute linux commands(container creation)
-ENTRYPOINT	: high priority than CMD
-COPY		: it will copy local files to conatiner.
-ADD		: it will copy internet files to conatiner.
-WORKDIR		: to go specific foilder inside container
-LABEL		: used to attach labels for image
-ENV		: to pass env variables inside the container
-ARGS		: to pass env variables outside the container
-EXPOSE		: used to allocate port number
-
+#FROM		: to get the os for conatiner.
+#RUN		: to execute linux commands(image creation)
+#CMD		: to execute linux commands(container creation)
+#ENTRYPOINT	: high priority than CMD
+#COPY		: it will copy local files to conatiner.
+#ADD		: it will copy internet files to conatiner.
+#WORKDIR		: to go specific foilder inside container
+#LABEL		: used to attach labels for image
+#ENV		: to pass env variables inside the container
+#ARGS		: to pass env variables outside the container
+#EXPOSE		: used to allocate port number
 
 Vim Dockerfile
-
 #File-1:
 FROM ubuntu
 RUN apt update -y
@@ -115,12 +108,17 @@ docker build -t img:v2 .
 #create the container from the image(img:v2).
 docker run -it --name cont3 img:v2
 
-
 #PROJECT -1:
 #Basic Deployment.
-
 FROM ubuntu
 RUN apt update -y
 RUN apt install apache2 -y
 COPY index.html /var/www/html
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+
+# -D -> tells about detached state whereas -it -> for attached state.
+# FOREGROUND -> tells that we can access the content when the container is stop state.
+# -itd -> helps us to access the container whenit's on stopped state.
+# -p -> stands for port number
+docker build -t img:v10 .
+docker run -itd --name cont10 -p 81:80 img:v10
