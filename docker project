@@ -60,13 +60,13 @@ EXPOSE		: used to allocate port number
 
 Vim Docker file
 
-File-1:
+#File-1:
 FROM ubuntu
 RUN apt update -y
 RUN apt install git maven apache2 -y
 RUN touch file1
 
-File-2:
+#File-2:
 FROM ubuntu
 RUN apt update -y
 RUN apt install git maven tree apache2 -y
@@ -74,10 +74,41 @@ RUN touch file1
 RUN apt install default-jre -y
 CMD ["java", "-version"]
 
-File-3: 
+#File-3: 
 FROM ubuntu
 COPY index.html /tmp
 ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87.tar.gz /tmp
+
+#File-4:
+FROM ubuntu
+COPY index.html /tmp
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87.tar.gz /tmp
+WORKDIR /tmp
+LABEL author hemanth
+
+#File-5:
+FROM ubuntu
+COPY index.html /tmp
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87.tar.gz /tmp
+WORKDIR /tmp
+LABEL author hemanth
+ENV client Microsoft
+ENV Server testing
+
+#File-6:
+FROM ubuntu
+COPY index.html /tmp
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87.tar.gz /tmp
+WORKDIR /tmp
+LABEL author hemanth
+
+#File-7:
+FROM ubuntu
+COPY index.html /tmp
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87.tar.gz /tmp
+WORKDIR /tmp
+LABEL author hemanth
+EXPOSE 8080
 
 
 
