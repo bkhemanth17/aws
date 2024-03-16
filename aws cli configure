@@ -83,9 +83,10 @@ PART-2: Granting Users and restricting access.
   }
 }
 
-
 #restricting certain services to the user 
 #create the policy restrict the services which we need to and attach this customer managed policy under permission boundary set of this role.
+#in the managed account role -> create the policy and attach to give full access but blocks iam user
+
 
 {
 	"Version": "2012-10-17",
