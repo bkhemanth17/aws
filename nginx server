@@ -1,5 +1,6 @@
 #install nginx server in the server after vm creation
 #!/bin/bash
+#nginxserver.sh
 yum update -y
 amazon-linux-extras install nginx1.12 -y
 service nginx start
