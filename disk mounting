@@ -1,0 +1,13 @@
+raw disk(ebs volume to linux)
+
+1.Format disk
+2.create filesystem after formatting
+3.after creating fs mount the disk
+
+lsblk
+1.fdisk /dev/xvdf
+2.press n and hit enter 4 times at last again press w (it will format).
+3.press lblk see (formatting)
+4.mkfs.ext4 /dev/xvdf1 (to create fs after formatting)
+5.mkdir /datavol1
+6.mount /dev/xvdf1 /datavol1/ (for mounting)
