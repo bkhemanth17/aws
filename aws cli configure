@@ -110,3 +110,52 @@ PART-2: Granting Users and restricting access.
 		}
 	]
 }
+
+
+
+#PART-3: Configuring S3 bucket policy to iam users
+
+
+#STEP-1: Public read access to all s3 bucket.
+
+
+{
+    "Version": "2012-10-17",
+    "Statement":[
+    {
+     "Sid": "PublicRead",
+     "Effect": "Allow",
+     "Principal": "*",
+     "Action": ["s3:GetObject", "s3:GetObjectversion"],
+     "Resource": ["arn:aws:s3:::annnnnnottttthhhherrrrbbbbuckkkeettt/*"]
+    }
+    ]
+}
+
+#STEP -2: Public access to all s3 buckets, and Full access to make any changes on a single bucket.
+#s3 bucket public access to iam user to internally. Single Bucket.
+
+{
+    "Version":"2012-10-17",
+    "Statement":[
+       {
+        "Effect": "Allow",
+        "Action": [
+            "s3:GetBucketLocation",
+            "s3:ListAllMyBuckets"
+        ],
+        "Resource": "*"
+       },
+       {
+        "Effect":"Allow",
+        "Action":["s3:ListBucket"],
+        "Resource":["arn:aws:s3:::annnnnnottttthhhherrrrbbbbuckkkeettt"]
+     },
+     {
+        "Sid": "Stmt1708672326793",
+        "Action": "s3:*",
+        "Effect": "Allow",
+        "Resource": "arn:aws:s3:::annnnnnottttthhhherrrrbbbbuckkkeettt/*"
+      }
+    ]
+}
