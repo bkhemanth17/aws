@@ -1,10 +1,16 @@
 #install nginx server in the server after vm creation
+#for older
 #!/bin/bash
 #nginxserver.sh
 yum update -y
 amazon-linux-extras install nginx1.12 -y
 service nginx start
 /usr/share/nginx/html/index.html   #path to access the web server html file
+
+#for latest
+yum install nginx -y
+systemctl start nginx.service
+systemctl status nginx.service
 
 
 #installing a web server(nginx server) in linux machine at vm creation level.
