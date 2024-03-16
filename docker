@@ -45,13 +45,42 @@ ls
 #create a docker file -> automation way
 #contdock.sh
 
+FROM		: to get the os for conatiner.
+RUN		: to execute linux commands(image creation)
+CMD		: to execute linux commands(container creation)
+ENTRYPOINT	: high priority than CMD
+COPY		: it will copy local files to conatiner.
+ADD		: it will copy internet files to conatiner.
+WORKDIR		: to go specific foilder inside container
+LABEL		: used to attach labels for image
+ENV		: to pass env variables inside the container
+ARGS		: to pass env variables outside the container
+EXPOSE		: used to allocate port number
+
+
 Vim Docker file
+
+File-1:
 FROM ubuntu
 RUN apt update -y
 RUN apt install git maven apache2 -y
 RUN touch file1
+
+File-2:
+FROM ubuntu
+RUN apt update -y
+RUN apt install git maven tree apache2 -y
+RUN touch file1
 RUN apt install default-jre -y
 CMD ["java", "-version"]
+
+File-3: 
+FROM ubuntu
+COPY index.html /tmp
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87.tar.gz /tmp
+
+
+
 
 #create image from the Docker file
 docker build -t img:v2 .
