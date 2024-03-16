@@ -16,10 +16,11 @@ nano .aws/credentials : in the nano file we can add multiple profiles
 aws s3 ls --profile s3 : to switch as another profile user and access s3 buckets.
 
 
-#STEP2: Write policy 
+#STEP2: Write policy
 1.create iam user with console access & CLI access.
 2. Get access key and secret keys for the user and create policy manually
 
+#the iam user gets read access to view all ec2 instances but only performs start,stop, restart operations 
 #ec2 access to user just to start stop reebot instances based on key tag
 
 
