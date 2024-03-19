@@ -147,4 +147,21 @@ docker run -it --name cont2 --volumes-from cont1 --privileged=true amazonlinux
 docker volume create volume1
 docker volume ls
 docker volume inspect volume1
-# cd /var/lib/docker/volumes/volume2/_data -> it's a mount point path where all the files and data is stored in this location
+# cd /var/lib/docker/volumes/volume2/_data -> it's a mount point path where all the files and data is stored in this location.
+
+#by using cp command we can transfer files from one volume to another volume.
+cp * /var/lib/docker/volumes/317e01462ce50347d3e80f5ddc5f57c6c6448c1c4884d3c7be6740c2bb6959d2/_data
+
+
+
+#commands container level
+docker ps 						#list of all running container
+docker ps -a 					#list all the contents in the container
+docker ps -a -q					#list the container id of all containers
+docker kill $(docker ps -a -q)		#it will take all containers to exited state(stopped state).
+docker rm $(docker ps -a -q)			#delete after container goes to stopped state.
+
+#commands image level
+docker images 					#list all the images
+docker images -q					#list all images id
+docker rmi -f $(docker images -q)         #delete all the images in the registry
