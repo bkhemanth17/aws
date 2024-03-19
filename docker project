@@ -149,6 +149,9 @@ docker volume ls
 docker volume inspect volume1
 # cd /var/lib/docker/volumes/volume2/_data -> it's a mount point path where all the files and data is stored in this location.
 
+#attaching volume to container
+docker run -it --name cont3 --mount source=volume2,destination=/volume2 ubuntu
+
 #by using cp command we can transfer files from one volume to another volume.
 cp * /var/lib/docker/volumes/317e01462ce50347d3e80f5ddc5f57c6c6448c1c4884d3c7be6740c2bb6959d2/_data
 
