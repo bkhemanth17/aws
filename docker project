@@ -122,3 +122,29 @@ CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
 # -p -> stands for port number
 docker build -t img:v10 .
 docker run -itd --name cont10 -p 81:80 img:v10
+
+
+DOCKER VOLUMES -> it's a shared folder from vm directory used for container
+#Same as EBS volumes 
+#We can attach same multiple containers.
+
+#Creating a Docker volume
+
+#from Dockerfile ->create a docker volume in the dockerfile which will automatically gets a volume in the image creation level.
+
+Vim Dockerfile
+
+FROM ubuntu
+VOLUME ["/volume1"]
+
+docker build -t img:v1 .
+docker run -it --name cont1 img:v1
+
+#we can attach a docker volume from one container to another container
+docker run -it --name cont2 --volumes-from cont1 --privileged=true amazonlinux
+
+#Create a volume
+docker volume create volume1
+docker volume ls
+docker volume inspect volume1
+# cd /var/lib/docker/volumes/volume2/_data -> it's a mount point path where all the files and data is stored in this location
