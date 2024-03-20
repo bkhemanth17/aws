@@ -212,3 +212,82 @@ docker run -itd --name myacc -p 83:80 macc:img
 #for amazonPay
 docker build -t apay:img .
 docker run -itd --name apay -p 84:80 apay:img
+
+
+#Method-2 : Using Docker composer
+#using docker compose we can create multiple containers and manage them (which will work on single host).
+#we can write a file called docker-compose which will be on yaml format. 
+#in that file we can write services info (images, port, volume, replicas)
+#it is not inbuilt we need to install manually.
+
+#setup:
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+ls /usr/local/bin/
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose version
+
+#vim docker-compose.yml
+
+version: '3.8'
+services:
+  login:
+    image: login:img
+    ports:
+      - "81:80"
+  home:
+    image: home:img
+    ports:
+      - "82:80"
+  myacc:
+    image: myacc:img
+    ports:
+      - "83:80"
+  appay:
+    image: appay:img
+    ports:
+      - "84:80"
+
+
+#docker-compose up -d 				: to create and start the container
+#docker-compose stop				: to stop containers
+#docker-compose start				: to start containers
+#docker-compose kill				: to kill containers
+#docker-compose rm				: to delete containers
+#docker-compose down				: to stop and delete containers
+#docker-compose pause				: to pause containers
+#docker-compose unpause				: to unpause containers
+#docker-compose ps				: to show containers of compose file
+#docker-compose top				: to show process runnning inside the containers 
+#docker-compose logs				: to show logs of containers 
+#docker-compose scale home=10			: to scale train containers
+
+
+docker-compose.yml -> it's a default file 
+# Supported filenames: docker-compose.yml, docker-compose.yaml, compose.yml, compose.yaml
+#docker-compose won't work if we change the default name
+
+#after changing the compose file
+mv docker-compose.yml test.yml
+
+#to use docker-compose command 
+docker-compose -f test.yml down
+docker-compose -f test.yml up -d
+docker-compose -f test.yml ps
+docker-compose -f test.yml start
+docker-compose -f test.yml stop
+docker-compose -f test.yml kill
+docker-compose -f test.yml rm
+docker-compose -f test.yml pause
+docker-compose -f test.yml unpause
+docker-compose -f test.yml top
+docker-compose -f test.yml logs
+docker-compose -f test.yml scale home=10
+
+
+#to go inside the container
+docker attach root_appay_1
+docker attach root_home_1
+docker attach root_login_1
+docker attach root_myacc_1
