@@ -124,7 +124,8 @@ docker build -t img:v10 .
 docker run -itd --name cont10 -p 81:80 img:v10
 
 
-DOCKER VOLUMES -> it's a shared folder from vm directory used for container
+DOCKER VOLUMES 
+#it's a shared folder from vm directory used for container
 #Same as EBS volumes 
 #We can attach same multiple containers.
 
@@ -164,13 +165,50 @@ cp * /var/lib/docker/volumes/317e01462ce50347d3e80f5ddc5f57c6c6448c1c4884d3c7be6
 
 
 #commands container level
-docker ps 						#list of all running container
-docker ps -a 					#list all the contents in the container
-docker ps -a -q					#list the container id of all containers
-docker kill $(docker ps -a -q)		#it will take all containers to exited state(stopped state).
-docker rm $(docker ps -a -q)			#delete after container goes to stopped state.
+docker ps 						                            #list of all running container
+docker ps -a 					                            #list all the contents in the container
+docker ps -a -q					                          #list the container id of all containers
+docker kill $(docker ps -a -q)		                #it will take all containers to exited state(stopped state).
+docker rm $(docker ps -a -q)			                #delete after container goes to stopped state.
 
 #commands image level
-docker images 					#list all the images
-docker images -q					#list all images id
-docker rmi -f $(docker images -q)         #delete all the images in the registry
+docker images 					                          #list all the images
+docker images -q					                        #list all images id
+docker rmi -f $(docker images -q)                 #delete all the images in the registry
+
+
+
+#deploying services of an application into individual containers -> microservices architecture.
+
+#using vim Dockerfile -> deploying a different services from an application into individual containers.
+
+
+#PROJECT-1 : AMAZON.COM -> clone
+
+#method-1:
+#we have home(timeline), MY account page, AmazonPay...
+vim Dockerfile
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install apache2 -y
+COPY index.html /var/www/html
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+
+#add the code, build an image and create the container 
+#container one is for authentication
+docker build -t login:img .
+docker run -itd --name login -p 81:80 login:img
+
+
+#For Home service
+docker build -t home:img .
+docker run -itd --name home -p 82:80 home:img
+
+#for MyAccount
+docker build -t myacc:img .
+docker run -itd --name myacc -p 83:80 macc:img
+
+#for amazonPay
+docker build -t apay:img .
+docker run -itd --name apay -p 84:80 apay:img
