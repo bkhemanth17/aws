@@ -123,7 +123,6 @@ CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
 docker build -t img:v10 .
 docker run -itd --name cont10 -p 81:80 img:v10
 
-
 DOCKER VOLUMES 
 #it's a shared folder from vm directory used for container
 #Same as EBS volumes 
@@ -163,7 +162,6 @@ docker run -it --name cont5 -v /volume4 ubuntu
 cp * /var/lib/docker/volumes/317e01462ce50347d3e80f5ddc5f57c6c6448c1c4884d3c7be6740c2bb6959d2/_data
 
 
-
 #commands container level
 docker ps 						                            #list of all running container
 docker ps -a 					                            #list all the contents in the container
@@ -182,7 +180,6 @@ docker rmi -f $(docker images -q)                 #delete all the images in the 
 
 #using vim Dockerfile -> deploying a different services from an application into individual containers.
 
-
 #PROJECT-1 : AMAZON.COM -> clone
 
 #method-1:
@@ -200,7 +197,6 @@ CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
 docker build -t login:img .
 docker run -itd --name login -p 81:80 login:img
 
-
 #For Home service
 docker build -t home:img .
 docker run -itd --name home -p 82:80 home:img
@@ -213,7 +209,6 @@ docker run -itd --name myacc -p 83:80 macc:img
 docker build -t apay:img .
 docker run -itd --name apay -p 84:80 apay:img
 
-
 #Method-2 : Using Docker composer
 #using docker compose we can create multiple containers and manage them (which will work on single host).
 #we can write a file called docker-compose which will be on yaml format. 
@@ -221,7 +216,6 @@ docker run -itd --name apay -p 84:80 apay:img
 #it is not inbuilt we need to install manually.
 
 #setup:
-
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ls /usr/local/bin/
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
@@ -263,7 +257,6 @@ services:
 #docker-compose logs				: to show logs of containers 
 #docker-compose scale home=10			: to scale train containers
 
-
 docker-compose.yml -> it's a default file 
 # Supported filenames: docker-compose.yml, docker-compose.yaml, compose.yml, compose.yaml
 #docker-compose won't work if we change the default name
@@ -285,9 +278,31 @@ docker-compose -f test.yml top
 docker-compose -f test.yml logs
 docker-compose -f test.yml scale home=10
 
-
 #to go inside the container
 docker attach root_appay_1
 docker attach root_home_1
 docker attach root_login_1
 docker attach root_myacc_1
+
+
+      #Docker Hub
+#Go to dockerhub -> create repositry 
+#-> set a reponame -> repo= public
+#to store images in docker hub -> tag images to docker hub account
+
+#login with docker useraccount credentials
+docker login  #(username & password)
+
+#tags the images to docker hub
+docker tag home:img bkhemanth17/temp1
+docker images
+
+#push to docker hub
+docker push bkhemanth17/temp1
+
+#{push the image}
+#{docker push dockeruser/reponame   #it need user credentials without loging imaging tagging wont work.}
+
+#we can now easily extract images from docker hub without creating them.
+docker run -itd --name cont1 -p 81:80 bkhemanth17/temp1
+
